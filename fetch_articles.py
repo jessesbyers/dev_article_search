@@ -9,7 +9,13 @@ headers = {
     "api-key": config.DEV_API_KEY
 }
 
-url = f"https://dev.to/api/articles/me"
+url = f"https://dev.to/api/articles/me/published"
 
 data = requests.get(url, headers=headers).json()
 print(data)
+
+article_list = []
+for article in data:
+    article_list.append(article["title"])
+
+print(article_list)
