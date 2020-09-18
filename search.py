@@ -1,9 +1,6 @@
 import requests
 import config
-# import sys
-# from colorama import init, Fore
 
-# init(autoreset=True)
 
 headers = {
     "api-key": config.DEV_API_KEY
@@ -17,4 +14,10 @@ article_list = []
 for article in data:
     article_list.append(article["title"])
 
+recent_articles = article_list[:10]
 
+
+# import sys
+# from colorama import init, Fore
+
+# init(autoreset=True)
