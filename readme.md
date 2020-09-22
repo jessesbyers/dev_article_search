@@ -31,26 +31,33 @@ Below, I'll share my process and my code. I hope you'll follow along and build y
 ## Initial Set-Up
 ### Create Project Folder and Repository
 First, you'll need to create a project folder, create a few placeholder files, initialize your repository and push it to GitHub.
+
 ![Imgur](https://i.imgur.com/yVVbq77.png)
 
 We will organize our dependencies in the `requirements.txt` file. In this project, we will start by installing the `requests` package (for requesting data from the APIs) and `colorama` package (for formatting text printed to the terminal). Add these names to the file, and run `pip3 install -r requirements.txt` to install all of the dependencies at once.
+
 ![Imgur](https://i.imgur.com/wy85cpa.png)
 
 ## Set up the Google Custom Search Engine API
+
 ![Imgur](https://i.imgur.com/dJSd7SN.png)
+
 In order to use this API to manage your custom searches, you will need to have a google account. Follow the link on the [Google Custom Search JSON API Documentation](https://developers.google.com/custom-search/v1/overview) to set up an API key for your project, and jot it down. Then click on the [Google Programmable Search Control Panel](https://programmablesearchengine.google.com/cse/all) link to set up your custom search and generate your Search Engine ID. You will need to choose at least one website domain to include in your search, so for now, just set it to `dev.to/*`, and any other sites where your articles *should* be showing up in a web search. Since I post my articles to Twitter (and occasionally to LinkedIn and GitHub), I added those domains as well. This will get us started for testing the script, and we can add/refine the custom search parameters once we are confident the script works.
+
 ![Imgur](https://i.imgur.com/slCBwff.png)
 
 After you press "Create", follow the link to your Control Panel to finish setting up the search and to get your Search Engine ID. Save the Search Engine ID for later, and keep the Control Panel open, as we'll modify the settings later on.
 
 ## Set up the Dev.to API
 Next, you will need to get your API key for the Dev.to API. In order to do this, go to your DEV settings page, click on Account, and scroll to the DEV API keys section. Just add a project title, and it will generate a new key. Jot down this key as well. For more details, visit the [Documentation for the DEV API](https://docs.forem.com/api/).
+
 ![Imgur](https://i.imgur.com/8J15qkV.png)
 
 ### Save API keys and Search Engine ID to config.py
 First, make sure you have added the `config.py` file to your `.gitignore` file to prevent it from being tracked by GitHub. Next, add all of the keys and IDs you just generated to the `config.py` file, to keep them secure. 
 
 When you're finished, the file should look like this, with each key/ID stored as a string.
+
 ![Imgur](https://i.imgur.com/XkZfV3t.png)
 
 *If you need a resource on securing API keys, I recommend BlackTechDiva's article [Hide Your API Keys](http://www.blacktechdiva.com/hide-api-keys/) for a clear and concise tutorial.*
@@ -63,18 +70,22 @@ Now we're ready to start putting those API keys to work! First, we'll make a fet
 In the `search.py` file, we will need to `import requests`, which will allow us to request the data from the Dev.to API. We will also `import config` so that we can access our API key which is locally stored in that file. 
 
 Our request will return our article data in this format:
+
 ![Imgur](https://i.imgur.com/DZgUbO8.png)
 
 By looping through the data object, we then create a list of titles of all published articles (article_list) by accessing `article["title"]`. We can also create a list of recent_articles, so that we can conduct searches on a sub-set of the ten most recent articles (recent_articles):
+
 ![Imgur](https://i.imgur.com/fEtcfTd.png)
 
 ## Build a General Search Script 
 Once we have a list of articles, we are ready to set up a general search script which will use each article title as a search term, and will print out the top 10 google hits (based on the settings in our Custom Search Engine) to the terminal. 
 
 ![Imgur](https://i.imgur.com/siKmrG7.png)
+
 First, we will import and initiate colorama, which will allow us to add color formatting to our search results when they print out to the terminal. The argument `autoreset=True` will set the color back to the default after each line.
 
 ![Imgur](https://i.imgur.com/6XoNo65.png)
+
 Next, we will set up our search logic. We will need to iterate through the list of recent articles, and make a request to the Google Custom Search API for each title. The response for each article title search will be a large dictionary, and the hits will be housed inside the "items" key. We can set the hits variable to include the top 10 hits by indexing the results.
 
 Next, we can iterate through the hits list to set up our logic for printing results to the terminal. By adding the `try:` and `except:` logic, we can avoid throwing errors when a search term fails to get hits.
@@ -82,6 +93,7 @@ Next, we can iterate through the hits list to set up our logic for printing resu
 *Note: So far in this example, I have limited the recent_articles list to 10 articles, and the hits list to 10 hits. This is based on the API's daily query limits, which allow for 100 queries per day. Feel free to adjust these numbers, but be mindful of the daily limit as you make your choices. More information about the daily limit can be found in the [documentation](https://developers.google.com/custom-search/v1/overview#pricing).*
 
 When we run the script at this point, we will get a printout of the top 10 hits for each of the 10 article titles, from any of the domains that we identified in our Google Custom Search Control Panel during an earlier step. In my example, my printout shows links to my articles on Dev.to, Twitter, LinkedIn and Github. For example: 
+
 ![Imgur](https://i.imgur.com/UIjx1h3.png)
 
 ## Putting it All Together
