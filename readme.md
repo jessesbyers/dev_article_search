@@ -1,5 +1,5 @@
 ## Learn More
-Learn more about how this works by visiting my blog post: [Someone Stole My DEV Article! How To Build a Python Script to Detect Stolen Content]()
+Learn more about how this works by visiting my blog post: [Someone Stole My DEV Article! How To Build a Python Script to Detect Stolen Content](https://dev.to/jessesbyers/someone-stole-my-dev-article-how-to-build-a-python-script-to-detect-stolen-content-54fg)
 
 ## How to Use
 Set up a local config.py file and add your Dev.to API key, google API key and serahc engine ID, following this format:
@@ -18,7 +18,7 @@ To run the script, enter the following into the command line:
 Next, manually open any links that look like they may include stolen content.
 
 # Someone Stole My DEV Article! How To Build a Python Script to Detect Stolen Content
-(originally posted on Dev.to at the link above)
+(originally posted on Dev.to [here](https://dev.to/jessesbyers/someone-stole-my-dev-article-how-to-build-a-python-script-to-detect-stolen-content-54fg)])
 
 Last spring, [one of my blog posts](https://dev.to/jessesbyers/react-and-d3-dynamic-covid-19-visualizations-part-2-country-comparison-dashboard-f9n) got a lot of views and likes, and was ultimately featured on the Top 7 List for that week. As a new blogger, I wanted to figure out what had made it so popular, so I could build on that success. However, in the process of investigation I stumbled upon my own writing...IN SOMEONE ELSE'S BLOG!!! And then I also stumbled upon their 12 Twitter accounts which were all tweeting out my content, AND TAKING CREDIT FOR IT AS THEIR OWN WORK!!! The wonderful folks at DEV helped me out and sent out a request to have the stolen content removed ...but ever since, I've been nervous about posting, fearing this might happen again.
 
